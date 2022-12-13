@@ -9,10 +9,12 @@ services:
       - ASPNETCORE_ENVIRONMENT={$ASPNETCORE_ENVIRONMENT}
       - ASPNETCORE_URLS=${ASPNETCORE_URLS}
     volumes:
-      - /var/www/blog.duxez.dev/wwwroot:/app/wwwroot
-      - /var/log/blog.duxez.dev:/app/umbraco/Logs
-      - /var/www/blog.duxez.dev/views:/app/views
-      - /var/www/blog.duxez.dev/appsettings.json:/app/appsettings.json
+      - umbraco_wwwroot:/app/wwwroot
+      - umbraco_logs:/app/umbraco/Logs
+      - umbraco_views:/app/views
+      - type: bind
+        source: /var/www/blog.duxez.dev/appsettings.json
+        target: /app/appsettings.json
   db:
     container_name: umbraco_db
     image: mcr.microsoft.com/mssql/server
@@ -22,4 +24,9 @@ services:
       - MSSQL_SA_PASSWORD={$MSSQL_SA_PASSWORD}
       - ACCEPT_EULA={$ACCEPT_EULA}
     volumes:
-      - /var/opt/mssql:/var/opt/mssql
+      - umbraco_mssql:/var/opt/mssql
+volumes:
+  umbraco_wwwroot:
+  umbraco_logs:
+  umbraco_views:
+  umbraco_mssql:
