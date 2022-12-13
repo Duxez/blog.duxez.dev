@@ -8,6 +8,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT={$ASPNETCORE_ENVIRONMENT}
       - ASPNETCORE_URLS=${ASPNETCORE_URLS}
+    volumes:
+      - /var/www/blog.duxez.dev/wwwroot:/app/wwwroot
+      - /var/log/blog.duxez.dev:/app/umbraco/Logs
+      - /var/www/blog.duxez.dev/views:/app/views
+      - /var/www/blog.duxez.dev/appsettings.json:/app/appsettings.json
   db:
     container_name: umbraco_db
     image: mcr.microsoft.com/mssql/server
@@ -16,3 +21,5 @@ services:
     environment:
       - MSSQL_SA_PASSWORD={$MSSQL_SA_PASSWORD}
       - ACCEPT_EULA={$ACCEPT_EULA}
+    volumes:
+      - /var/opt/mssql:/var/opt/mssql
