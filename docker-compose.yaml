@@ -1,0 +1,15 @@
+version: "3"
+services:
+  app:
+    container_name: umbraco_app
+    build: https://github.com/Duxez/blog.duxez.dev.git#main
+    ports: 
+      - 1764:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+  db:
+    container_name: umbraco_db
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - "3300:1433"
