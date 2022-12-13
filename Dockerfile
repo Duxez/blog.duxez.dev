@@ -7,10 +7,10 @@ COPY ["Personal/Personal.csproj", "Personal/"]
 RUN dotnet restore "Personal/Personal.csproj" -f
 COPY . .
 WORKDIR "/src/Personal"
-RUN dotnet build "Personal.csproj" -c Release -o /app/build -f
+RUN dotnet build "Personal.csproj" -c Debug -o /app/build -f
 
 FROM build as publish
-RUN dotnet publish "Personal.csproj" -c Release -o /app/publish -f
+RUN dotnet publish "Personal.csproj" -c Debug -o /app/publish -f
 
 FROM base AS final
 WORKDIR /app
