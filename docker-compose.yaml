@@ -6,10 +6,13 @@ services:
     ports: 
       - 1764:80
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT={$ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS}
   db:
     container_name: umbraco_db
     image: mcr.microsoft.com/mssql/server
     ports:
       - "3300:1433"
+    environment:
+      - MSSQL_SA_PASSWORD={$MSSQL_SA_PASSWORD}
+      - ACCEPT_EULA={$ACCEPT_EULA}
