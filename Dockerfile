@@ -14,7 +14,8 @@ RUN dotnet publish "Personal.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-COPY --from=publish "Personal.csproj" .
+# COPY --from=publish /app/publish .
+# COPY --from=publish "Personal.csproj" .
+COPY --from=build /app/build .
 
 ENTRYPOINT [ "dotnet", "Personal.dll" ]
