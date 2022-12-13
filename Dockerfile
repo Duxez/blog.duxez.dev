@@ -4,13 +4,13 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Personal/Personal.csproj", "Personal/"]
-RUN dotnet restore "Personal/Personal.csproj"
+RUN dotnet restore "Personal/Personal.csproj" -f
 COPY . .
 WORKDIR "/src/Personal"
-RUN dotnet build "Personal.csproj" -c Release -o /app/build
+RUN dotnet build "Personal.csproj" -c Release -o /app/build -f
 
 FROM build as publish
-RUN dotnet publish "Personal.csproj" -c Release -o /app/publish
+RUN dotnet publish "Personal.csproj" -c Release -o /app/publish -f
 
 FROM base AS final
 WORKDIR /app
