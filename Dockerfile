@@ -16,6 +16,6 @@ FROM base AS final
 WORKDIR /app
 # COPY --from=publish /app/publish .
 # COPY --from=publish "Personal.csproj" .
-COPY --from=build /app/build .
+COPY --from=build /app .
 
 ENTRYPOINT [ "dotnet", "Personal.dll" ]
